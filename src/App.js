@@ -49,9 +49,9 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box w="100%" py="2">
+      <Box w="100%" py="2" bg="#ECEBEB">
         <Container maxW="container.md" mb="6">
-          <Card shadow="none" bg="#f9f9f9">
+          <Card>
             <CardBody>
               <Box>
                 <Stack spacing="8">
