@@ -51,14 +51,6 @@ function App() {
     fetchData().catch(console.error);
   }, [dryMass, totalDeltaV]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if
-  //   };
-
-  //   fetchData().catch(console.error);
-  // }, [totalImpulse, dryMass, totalDeltaV]);
-
   return (
     <ChakraProvider theme={theme}>
       <Box w="100%" py="2" bg="#ECEBEB">
@@ -66,17 +58,17 @@ function App() {
           <Card>
             <CardBody>
               <Box>
-                <Stack spacing="8">
+                <Stack spacing="6">
                   <Stack>
                     <Flex align="center">
-                      <Text fontWeight="600" fontSize="lg" color="gray.500">
+                      <Text fontWeight="600" fontSize="sm" color="gray.500">
                         TOTAL IMPULSE
                       </Text>
                       <Spacer />
-                      <Text fontWeight="600" fontSize="lg" mr="2">
+                      <Text fontWeight="600" fontSize="sm" mr="2">
                         {totalImpulse}
                       </Text>
-                      <Text fontWeight="400" fontSize="lg">
+                      <Text fontWeight="400" fontSize="sm">
                         N-s
                       </Text>
                     </Flex>
@@ -97,16 +89,16 @@ function App() {
                         <SliderThumb />
                       </Slider>
                       <Flex align="center">
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           0
                         </Text>
                         <Spacer />
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           500k
                         </Text>
                       </Flex>
                     </Box>
-                    <Text fontWeight="500" fontSize="xs" color="gray.500">
+                    <Text fontWeight="500" fontSize="2xs" color="gray.500">
                       Or adjust these sliders to specify the spacecraft dry mass
                       and mission delta-V.
                     </Text>
@@ -114,14 +106,14 @@ function App() {
 
                   <Stack>
                     <Flex align="center">
-                      <Text fontWeight="600" fontSize="lg" color="gray.500">
+                      <Text fontWeight="600" fontSize="sm" color="gray.500">
                         SPACECRAFT DRY MASS
                       </Text>
                       <Spacer />
-                      <Text fontWeight="600" fontSize="lg" mr="2">
+                      <Text fontWeight="600" fontSize="sm" mr="2">
                         {dryMass === 0 ? '-' : dryMass}
                       </Text>
-                      <Text fontWeight="400" fontSize="lg">
+                      <Text fontWeight="400" fontSize="sm">
                         kg
                       </Text>
                     </Flex>
@@ -138,11 +130,11 @@ function App() {
                         <SliderThumb />
                       </Slider>
                       <Flex align="center">
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           0
                         </Text>
                         <Spacer />
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           500
                         </Text>
                       </Flex>
@@ -151,14 +143,14 @@ function App() {
 
                   <Stack>
                     <Flex align="center">
-                      <Text fontWeight="600" fontSize="lg" color="gray.500">
+                      <Text fontWeight="600" fontSize="sm" color="gray.500">
                         TOTAL MISSION DELTA-V
                       </Text>
                       <Spacer />
-                      <Text fontWeight="600" fontSize="lg" mr="2">
+                      <Text fontWeight="600" fontSize="sm" mr="2">
                         {totalDeltaV === 0 ? '-' : totalDeltaV}
                       </Text>
-                      <Text fontWeight="400" fontSize="lg">
+                      <Text fontWeight="400" fontSize="sm">
                         m/s
                       </Text>
                     </Flex>
@@ -175,11 +167,11 @@ function App() {
                         <SliderThumb />
                       </Slider>
                       <Flex align="center">
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           0
                         </Text>
                         <Spacer />
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           1000
                         </Text>
                       </Flex>
@@ -188,19 +180,16 @@ function App() {
 
                   <Stack>
                     <Flex align="center">
-                      <Text fontWeight="600" fontSize="lg" color="gray.500">
+                      <Text fontWeight="600" fontSize="sm" color="gray.500">
                         CHEMICAL/ELECTRIC RATIO
                       </Text>
                       <Spacer />
-                      <Text fontWeight="600" fontSize="lg" mr="2">
+                      <Text fontWeight="600" fontSize="sm">
                         {chemicalElectricRatio === 0
                           ? '0% / 100%'
                           : `${chemicalElectricRatio}% / ${
                               100 - chemicalElectricRatio
                             }%`}
-                      </Text>
-                      <Text fontWeight="400" fontSize="lg">
-                        Chemical/Electric
                       </Text>
                     </Flex>
                     <Box>
@@ -216,11 +205,11 @@ function App() {
                         <SliderThumb />
                       </Slider>
                       <Flex align="center">
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           0% Chemical / 100% Electric
                         </Text>
                         <Spacer />
-                        <Text color="gray.500" fontWeight="600" fontSize="sm">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
                           100% Chemical / 0% Electric
                         </Text>
                       </Flex>
@@ -234,37 +223,45 @@ function App() {
         <Container maxW="container.xl">
           <Card>
             <CardBody>
-              <Stack direction="row" spacing="8" mb="8">
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing="4"
+                mb="4"
+              >
                 <Flex align="center">
-                  <Text color="gray.500" fontWeight="700" fontSize="lg" mr="2">
+                  <Text color="gray.500" fontWeight="700" fontSize="md" mr="2">
                     Total Impulse:
                   </Text>
-                  <Text fontWeight="700" fontSize="lg" mr="1">
+                  <Text fontWeight="600" fontSize="md" mr="2">
                     {totalImpulse === 0
                       ? 0.0
                       : (totalImpulse / 1000).toFixed(2)}
                   </Text>
-                  <Text>kN-s</Text>
+                  <Text fontWeight="400" fontSize="md">
+                    kN-s
+                  </Text>
                 </Flex>
 
                 <Flex align="center">
-                  <Text color="gray.500" fontWeight="700" fontSize="lg" mr="2">
+                  <Text color="gray.500" fontWeight="700" fontSize="md" mr="2">
                     Total Delta-V:
                   </Text>
-                  <Text fontWeight="700" fontSize="lg" mr="1">
+                  <Text fontWeight="700" fontSize="md" mr="1">
                     {totalDeltaV === 0 ? '-' : totalDeltaV}
                   </Text>
                   <Text>m/s</Text>
                 </Flex>
 
                 <Flex align="center">
-                  <Text color="gray.500" fontWeight="700" fontSize="lg" mr="2">
+                  <Text color="gray.500" fontWeight="700" fontSize="md" mr="2">
                     Dry Mass:
                   </Text>
-                  <Text fontWeight="700" fontSize="lg" mr="1">
+                  <Text fontWeight="600" fontSize="md" mr="2">
                     {dryMass === 0 ? '-' : dryMass}
                   </Text>
-                  <Text>kg</Text>
+                  <Text fontWeight="400" fontSize="md">
+                    kg
+                  </Text>
                 </Flex>
               </Stack>
 
