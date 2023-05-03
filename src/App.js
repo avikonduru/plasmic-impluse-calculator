@@ -267,7 +267,7 @@ function App() {
 
               <Box>
                 <TableContainer>
-                  <Table variant="simple" size="md" whiteSpace="wrap">
+                  <Table variant="simple" size="sm" whiteSpace="wrap">
                     <Thead>
                       <Tr>
                         <Th>Parameters</Th>
@@ -282,7 +282,7 @@ function App() {
                     </Thead>
                     <Tbody>
                       <Tr>
-                        <Td>System Dry Mass, less tank</Td>
+                        <Td>OrbitShift System Dry Mass, less tank</Td>
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -317,60 +317,7 @@ function App() {
                       </Tr>
 
                       <Tr>
-                        <Td>Total Ar Propellant Mass</Td>
-                        <Td>kg</Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (0.00005 * totalImpulse).toFixed(2)}
-                        </Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (4.35 * Math.pow(10, -5) * totalImpulse).toFixed(
-                                2
-                              )}
-                        </Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (
-                                3.7845 *
-                                Math.pow(10, -5) *
-                                totalImpulse
-                              ).toFixed(2)}
-                        </Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (
-                                3.292515 *
-                                Math.pow(10, -5) *
-                                totalImpulse
-                              ).toFixed(2)}
-                        </Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (
-                                2.86448805 *
-                                Math.pow(10, -5) *
-                                totalImpulse
-                              ).toFixed(2)}
-                        </Td>
-                        <Td isNumeric>
-                          {totalImpulse === 0
-                            ? 0
-                            : (
-                                2.4921046 *
-                                Math.pow(10, -5) *
-                                totalImpulse
-                              ).toFixed(2)}
-                        </Td>
-                      </Tr>
-
-                      <Tr>
-                        <Td>Total H Propellant Mass</Td>
+                        <Td>Total H2/O2 Propellant Mass</Td>
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -425,10 +372,171 @@ function App() {
                               ).toFixed(2)}
                         </Td>
                       </Tr>
+
+                      <Tr>
+                        <Td>Argon Propellant Mass</Td>
+                        <Td>kg</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00005 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (4.35 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.7845 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.292515 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.86448805 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.4921046 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                      </Tr>
+
+                      <Tr>
+                        <Td>Total Propellant Volume @ 2600 psi</Td>
+                        <Td>L</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00005 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (4.35 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.7845 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.292515 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.86448805 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.4921046 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                      </Tr>
+
+                      <Tr>
+                        <Td>Argon Propellant Mass</Td>
+                        <Td>kg</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.33333333 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (2.9 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (2.523 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.19501 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.9096587 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.66140307 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                      </Tr>
                     </Tbody>
                     <Tfoot>
                       <Tr>
-                        <Th>System Wet Mass</Th>
+                        <Th>OrbitShift System Wet Mass</Th>
                         <Th>kg</Th>
                         <Th isNumeric>
                           {totalImpulse === 0
