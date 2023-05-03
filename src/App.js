@@ -37,15 +37,27 @@ function App() {
   const [totalImpulse, setTotalImpulse] = useState(0);
   const [dryMass, setDryMass] = useState(0);
   const [totalDeltaV, setTotalDeltaV] = useState(0);
-  const [chemicalElectricRatio, setChemicalElectricRatio] = useState(0);
+  const [chemicalElectricRatio, setChemicalElectricRatio] = useState(50);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log({ totalImpulse, dryMass, totalDeltaV });
+      if (dryMass === 0 || totalDeltaV === 0) {
+        setTotalImpulse(0);
+      } else {
+        setTotalImpulse(dryMass * totalDeltaV);
+      }
     };
 
     fetchData().catch(console.error);
-  }, [totalImpulse, dryMass, totalDeltaV]);
+  }, [dryMass, totalDeltaV]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if
+  //   };
+
+  //   fetchData().catch(console.error);
+  // }, [totalImpulse, dryMass, totalDeltaV]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -70,10 +82,14 @@ function App() {
                     </Flex>
                     <Box>
                       <Slider
-                        defaultValue={0}
+                        value={totalImpulse}
                         min={0}
                         max={500000}
-                        onChange={val => setTotalImpulse(val)}
+                        onChange={val => {
+                          if (dryMass * totalDeltaV <= val) {
+                            setTotalImpulse(val);
+                          }
+                        }}
                       >
                         <SliderTrack>
                           <SliderFilledTrack />
@@ -111,7 +127,7 @@ function App() {
                     </Flex>
                     <Box>
                       <Slider
-                        defaultValue={0}
+                        value={dryMass}
                         min={0}
                         max={500}
                         onChange={val => setDryMass(val)}
@@ -148,7 +164,7 @@ function App() {
                     </Flex>
                     <Box>
                       <Slider
-                        defaultValue={0}
+                        value={totalDeltaV}
                         min={0}
                         max={1000}
                         onChange={val => setTotalDeltaV(val)}
@@ -189,7 +205,7 @@ function App() {
                     </Flex>
                     <Box>
                       <Slider
-                        defaultValue={0}
+                        value={chemicalElectricRatio}
                         min={0}
                         max={100}
                         onChange={val => setChemicalElectricRatio(val)}
@@ -264,7 +280,6 @@ function App() {
                         <Th isNumeric>200 W</Th>
                         <Th isNumeric>250 W</Th>
                         <Th isNumeric>300 W</Th>
-                        <Th isNumeric>400 W</Th>
                         <Th isNumeric>500 W</Th>
                       </Tr>
                     </Thead>
@@ -272,62 +287,206 @@ function App() {
                       <Tr>
                         <Td>System Dry Mass, less tank</Td>
                         <Td>kg</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                      </Tr>
-
-                      <Tr>
-                        <Td>On-Orbit Burn Time *</Td>
-                        <Td>hr</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00008333333 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00008333333 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00009166666 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00009166666 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.0001 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.0001 * totalImpulse).toFixed(2)}
+                        </Td>
                       </Tr>
 
                       <Tr>
                         <Td>Total Ar Propellant Mass</Td>
                         <Td>kg</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (0.00005 * totalImpulse).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (4.35 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.7845 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.292515 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.86448805 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.4921046 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
                       </Tr>
 
                       <Tr>
                         <Td>Total H Propellant Mass</Td>
                         <Td>kg</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
-                        <Td isNumeric>0</Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                4.33333333 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (3.77 * Math.pow(10, -5) * totalImpulse).toFixed(
+                                2
+                              )}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                3.2799 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.853513 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.48255631 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
+                        <Td isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.15982399 *
+                                Math.pow(10, -5) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Td>
                       </Tr>
                     </Tbody>
                     <Tfoot>
                       <Tr>
                         <Th>System Wet Mass</Th>
                         <Th>kg</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
-                        <Th isNumeric>0</Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                2.16666667 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.93533333 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.87540667 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.75077047 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.72567031 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
+                        <Th isNumeric>
+                          {totalImpulse === 0
+                            ? 0
+                            : (
+                                1.63133317 *
+                                Math.pow(10, -4) *
+                                totalImpulse
+                              ).toFixed(2)}
+                        </Th>
                       </Tr>
                     </Tfoot>
                   </Table>
