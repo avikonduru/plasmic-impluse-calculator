@@ -29,13 +29,20 @@ import {
   TableContainer,
   Card,
   CardBody,
+  Select,
+  Button,
+  CardHeader,
+  Heading,
+  IconButton,
 } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
+
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 
 function App() {
   const [totalImpulse, setTotalImpulse] = useState(0);
-  const [dryMass, setDryMass] = useState(0);
+  const [dryMass, setDryMass] = useState(5);
   const [totalDeltaV, setTotalDeltaV] = useState(0);
   const [chemicalElectricRatio, setChemicalElectricRatio] = useState(50);
 
@@ -120,7 +127,7 @@ function App() {
                     <Box>
                       <Slider
                         value={dryMass}
-                        min={0}
+                        min={5}
                         max={500}
                         onChange={val => setDryMass(val)}
                       >
@@ -131,7 +138,7 @@ function App() {
                       </Slider>
                       <Flex align="center">
                         <Text color="gray.500" fontWeight="600" fontSize="xs">
-                          0
+                          5
                         </Text>
                         <Spacer />
                         <Text color="gray.500" fontWeight="600" fontSize="xs">
@@ -286,38 +293,38 @@ function App() {
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.00008333333 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.00008333333 * totalImpulse + 5).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.00008333333 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.00008333333 * totalImpulse + 5).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.00009166666 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.00009166666 * totalImpulse + 5).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.00009166666 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.00009166666 * totalImpulse + 5).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.0001 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.0001 * totalImpulse + 5).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
-                            ? 0
-                            : (0.0001 * totalImpulse).toFixed(2)}
+                            ? 5
+                            : (0.0001 * totalImpulse + 5).toFixed(2)}
                         </Td>
                       </Tr>
 
                       <Tr>
-                        <Td>Total H2/O2 Propellant Mass</Td>
+                        <Td>Total Chemical Propellant Mass</Td>
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -374,7 +381,7 @@ function App() {
                       </Tr>
 
                       <Tr>
-                        <Td>Argon Propellant Mass</Td>
+                        <Td>Electric Propellant Mass</Td>
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -540,56 +547,50 @@ function App() {
                         <Th>kg</Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                2.16666667 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                2.16666667 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                1.93533333 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                1.93533333 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                1.87540667 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                1.87540667 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                1.75077047 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                1.75077047 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                1.72567031 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                1.72567031 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                         <Th isNumeric>
                           {totalImpulse === 0
-                            ? 0
+                            ? 5
                             : (
-                                1.63133317 *
-                                Math.pow(10, -4) *
-                                totalImpulse
+                                1.63133317 * Math.pow(10, -4) * totalImpulse +
+                                5
                               ).toFixed(2)}
                         </Th>
                       </Tr>
@@ -601,6 +602,85 @@ function App() {
           </Card>
         </Container>
       </Box>
+      {/* <Box bg="gray.100" p="4">
+        <Card maxW="lg">
+          <CardBody>
+            <Stack spacing="4">
+              <Heading as="h4" size="md" mb="2">
+                Upload Documents
+              </Heading>
+
+              <Flex>
+                <Select size="lg">
+                  <option value="option1">File 1</option>
+                  <option value="option2">File 2</option>
+                  <option value="option3">File 3</option>
+                </Select>
+                <Spacer />
+                <Button size="lg" ml="4">
+                  Upload
+                </Button>
+              </Flex>
+
+              <Stack bg="gray.100" rounded="md" p="4" spacing="4">
+                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
+                  <Box>
+                    <Text fontSize="md" fontWeight="700">
+                      File 1
+                    </Text>
+                    <Text fontSize="sm" fontWeight="400">
+                      02/10/2023 - 2:45 PM
+                    </Text>
+                  </Box>
+
+                  <Spacer />
+                  <IconButton
+                    colorScheme="red"
+                    icon={<DeleteIcon />}
+                    size="sm"
+                  />
+                </Flex>
+
+                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
+                  <Box>
+                    <Text fontSize="md" fontWeight="700">
+                      File 2
+                    </Text>
+                    <Text fontSize="sm" fontWeight="400">
+                      02/10/2023 - 2:45 PM
+                    </Text>
+                  </Box>
+
+                  <Spacer />
+                  <IconButton
+                    colorScheme="red"
+                    icon={<DeleteIcon />}
+                    size="sm"
+                  />
+                </Flex>
+
+                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
+                  <Box>
+                    <Text fontSize="md" fontWeight="700">
+                      File 3
+                    </Text>
+                    <Text fontSize="sm" fontWeight="400">
+                      02/10/2023 - 2:45 PM
+                    </Text>
+                  </Box>
+
+                  <Spacer />
+                  <IconButton
+                    colorScheme="red"
+                    icon={<DeleteIcon />}
+                    size="sm"
+                  />
+                </Flex>
+              </Stack>
+            </Stack>
+          </CardBody>
+        </Card>
+      </Box> */}
     </ChakraProvider>
   );
 }
