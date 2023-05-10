@@ -128,7 +128,7 @@ function App() {
                       <Slider
                         value={dryMass}
                         min={5}
-                        max={500}
+                        max={100}
                         onChange={val => setDryMass(val)}
                       >
                         <SliderTrack>
@@ -142,7 +142,7 @@ function App() {
                         </Text>
                         <Spacer />
                         <Text color="gray.500" fontWeight="600" fontSize="xs">
-                          500
+                          100
                         </Text>
                       </Flex>
                     </Box>
