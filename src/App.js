@@ -41,22 +41,26 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 
 function App() {
-  const [totalImpulse, setTotalImpulse] = useState(0);
+  const [totalImpulse, setTotalImpulse] = useState(100000);
   const [dryMass, setDryMass] = useState(5);
   const [totalDeltaV, setTotalDeltaV] = useState(0);
   const [chemicalElectricRatio, setChemicalElectricRatio] = useState(50);
 
+  const [justLoaded, setJustLoaded] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
-      if (dryMass === 0 || totalDeltaV === 0) {
-        setTotalImpulse(0);
+      if (dryMass === 5 || totalDeltaV === 0) {
+        if (!justLoaded) {
+          setTotalImpulse(0);
+        }
       } else {
         setTotalImpulse(dryMass * totalDeltaV);
       }
     };
 
     fetchData().catch(console.error);
-  }, [dryMass, totalDeltaV]);
+  }, [dryMass, totalDeltaV, justLoaded]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -85,6 +89,7 @@ function App() {
                         min={0}
                         max={500000}
                         onChange={val => {
+                          setJustLoaded(false);
                           if (dryMass * totalDeltaV <= val) {
                             setTotalImpulse(val);
                           }
@@ -129,7 +134,10 @@ function App() {
                         value={dryMass}
                         min={5}
                         max={100}
-                        onChange={val => setDryMass(val)}
+                        onChange={val => {
+                          setJustLoaded(false);
+                          setDryMass(val);
+                        }}
                       >
                         <SliderTrack>
                           <SliderFilledTrack />
@@ -166,7 +174,10 @@ function App() {
                         value={totalDeltaV}
                         min={0}
                         max={1000}
-                        onChange={val => setTotalDeltaV(val)}
+                        onChange={val => {
+                          setJustLoaded(false);
+                          setTotalDeltaV(val);
+                        }}
                       >
                         <SliderTrack>
                           <SliderFilledTrack />
@@ -204,7 +215,10 @@ function App() {
                         value={chemicalElectricRatio}
                         min={0}
                         max={100}
-                        onChange={val => setChemicalElectricRatio(val)}
+                        onChange={val => {
+                          setJustLoaded(false);
+                          setChemicalElectricRatio(val);
+                        }}
                       >
                         <SliderTrack>
                           <SliderFilledTrack />
@@ -332,15 +346,19 @@ function App() {
                             : (
                                 4.33333333 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
                             ? 0
-                            : (3.77 * Math.pow(10, -5) * totalImpulse).toFixed(
-                                2
-                              )}
+                            : (
+                                3.77 *
+                                Math.pow(10, -5) *
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
+                              ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -348,7 +366,8 @@ function App() {
                             : (
                                 3.2799 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -357,7 +376,8 @@ function App() {
                             : (
                                 2.853513 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -366,7 +386,8 @@ function App() {
                             : (
                                 2.48255631 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -375,7 +396,8 @@ function App() {
                             : (
                                 2.15982399 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                ((chemicalElectricRatio * 2) / 100).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                       </Tr>
@@ -386,14 +408,27 @@ function App() {
                         <Td isNumeric>
                           {totalImpulse === 0
                             ? 0
-                            : (0.00005 * totalImpulse).toFixed(2)}
+                            : (
+                                0.00005 *
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
+                              ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
                             ? 0
-                            : (4.35 * Math.pow(10, -5) * totalImpulse).toFixed(
-                                2
-                              )}
+                            : (
+                                4.35 *
+                                Math.pow(10, -5) *
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
+                              ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -401,7 +436,11 @@ function App() {
                             : (
                                 3.7845 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -410,7 +449,11 @@ function App() {
                             : (
                                 3.292515 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -419,7 +462,11 @@ function App() {
                             : (
                                 2.86448805 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                         <Td isNumeric>
@@ -428,13 +475,17 @@ function App() {
                             : (
                                 2.4921046 *
                                 Math.pow(10, -5) *
-                                totalImpulse
+                                totalImpulse *
+                                (
+                                  ((100 - chemicalElectricRatio) * 2) /
+                                  100
+                                ).toFixed(2)
                               ).toFixed(2)}
                         </Td>
                       </Tr>
 
                       <Tr>
-                        <Td>Total Propellant Volume @ 2600 psi</Td>
+                        <Td>Total Chem. Propellant Volume @ 2600 psi</Td>
                         <Td>L</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -487,7 +538,7 @@ function App() {
                       </Tr>
 
                       <Tr>
-                        <Td>Argon Propellant Mass</Td>
+                        <Td>EP Propellant Mass</Td>
                         <Td>kg</Td>
                         <Td isNumeric>
                           {totalImpulse === 0
@@ -602,85 +653,6 @@ function App() {
           </Card>
         </Container>
       </Box>
-      {/* <Box bg="gray.100" p="4">
-        <Card maxW="lg">
-          <CardBody>
-            <Stack spacing="4">
-              <Heading as="h4" size="md" mb="2">
-                Upload Documents
-              </Heading>
-
-              <Flex>
-                <Select size="lg">
-                  <option value="option1">File 1</option>
-                  <option value="option2">File 2</option>
-                  <option value="option3">File 3</option>
-                </Select>
-                <Spacer />
-                <Button size="lg" ml="4">
-                  Upload
-                </Button>
-              </Flex>
-
-              <Stack bg="gray.100" rounded="md" p="4" spacing="4">
-                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
-                  <Box>
-                    <Text fontSize="md" fontWeight="700">
-                      File 1
-                    </Text>
-                    <Text fontSize="sm" fontWeight="400">
-                      02/10/2023 - 2:45 PM
-                    </Text>
-                  </Box>
-
-                  <Spacer />
-                  <IconButton
-                    colorScheme="red"
-                    icon={<DeleteIcon />}
-                    size="sm"
-                  />
-                </Flex>
-
-                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
-                  <Box>
-                    <Text fontSize="md" fontWeight="700">
-                      File 2
-                    </Text>
-                    <Text fontSize="sm" fontWeight="400">
-                      02/10/2023 - 2:45 PM
-                    </Text>
-                  </Box>
-
-                  <Spacer />
-                  <IconButton
-                    colorScheme="red"
-                    icon={<DeleteIcon />}
-                    size="sm"
-                  />
-                </Flex>
-
-                <Flex bg="gray.300" rounded="md" px="4" py="4" align="center">
-                  <Box>
-                    <Text fontSize="md" fontWeight="700">
-                      File 3
-                    </Text>
-                    <Text fontSize="sm" fontWeight="400">
-                      02/10/2023 - 2:45 PM
-                    </Text>
-                  </Box>
-
-                  <Spacer />
-                  <IconButton
-                    colorScheme="red"
-                    icon={<DeleteIcon />}
-                    size="sm"
-                  />
-                </Flex>
-              </Stack>
-            </Stack>
-          </CardBody>
-        </Card>
-      </Box> */}
     </ChakraProvider>
   );
 }
