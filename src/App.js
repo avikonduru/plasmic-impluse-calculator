@@ -44,30 +44,32 @@ function App() {
   const [dryMass, setDryMass] = useState(200);
   const [totalDeltaV, setTotalDeltaV] = useState(500);
   const [chemicalElectricRatio, setChemicalElectricRatio] = useState(50);
-  const [powerLevel, setPowerLevel] = useState(50);
+  const [powerLevel, setPowerLevel] = useState(75);
 
-  const [totalImpulse, setTotalImpulse] = useState(0);
+  const [totalImpulse, setTotalImpulse] = useState(100000);
 
   const [systemDryMass, setSystemDryMass] = useState(6);
   const [chemicalPropellantMass, setChemicalPropellantMass] = useState(19);
   const [electricPropellantMass, setElectricPropellantMass] = useState(19);
-  const [tankMass, setTankMass] = useState(0);
+  const [tankMass, setTankMass] = useState(2);
 
-  const [epThrust, setEpThrust] = useState(0);
-  const [chemicalThrust, setChemicalThrust] = useState(0);
-  const [systemWetMass, setSystemWetMass] = useState(0);
+  const [epThrust, setEpThrust] = useState(2.5);
+  const [chemicalThrust, setChemicalThrust] = useState(2);
+  const [systemWetMass, setSystemWetMass] = useState(35);
 
   useEffect(() => {
     setTotalImpulse(dryMass * totalDeltaV);
   }, [dryMass, totalDeltaV]);
 
   useEffect(() => {
-    if (powerLevel <= 150) {
+    if (powerLevel >= 75 && powerLevel < 125) {
       setSystemDryMass(6);
-    } else if (powerLevel <= 450 && powerLevel > 150) {
+    } else if (powerLevel >= 125 && powerLevel < 250) {
+      setSystemDryMass(6);
+    } else if (powerLevel >= 250 && powerLevel < 500) {
       setSystemDryMass(8);
-    } else if (powerLevel <= 1000 && powerLevel > 450) {
-      setSystemDryMass(10);
+    } else if (powerLevel >= 500) {
+      setSystemDryMass(8);
     }
   }, [powerLevel]);
 
@@ -78,62 +80,60 @@ function App() {
   }, [chemicalElectricRatio, totalImpulse]);
 
   useEffect(() => {
-    setChemicalThrust(
-      (100 - chemicalElectricRatio) * totalImpulse * (1 / 1250000)
-    );
-  }, [chemicalElectricRatio, totalImpulse]);
-
-  useEffect(() => {
-    if (powerLevel >= 50 && powerLevel < 150) {
-      setEpThrust(chemicalElectricRatio * totalImpulse * (5 / 5000000));
-    } else if (powerLevel >= 150 && powerLevel < 300) {
-      setEpThrust(chemicalElectricRatio * totalImpulse * (10 / 5000000));
-    } else if (powerLevel >= 300 && powerLevel < 450) {
-      setEpThrust(chemicalElectricRatio * totalImpulse * (15 / 5000000));
-    } else if (powerLevel >= 450 && powerLevel < 1000) {
-      setEpThrust(chemicalElectricRatio * totalImpulse * (25 / 5000000));
-    } else if (powerLevel >= 1000) {
-      setEpThrust(chemicalElectricRatio * totalImpulse * (50 / 5000000));
-    }
-  }, [chemicalElectricRatio, totalImpulse, powerLevel]);
-
-  useEffect(() => {
-    if (powerLevel >= 50 && powerLevel < 150) {
+    if (powerLevel >= 75 && powerLevel < 125) {
       setElectricPropellantMass(
         (100 - chemicalElectricRatio) * totalImpulse * (8 / 5000000)
       );
-    } else if (powerLevel >= 150 && powerLevel < 300) {
+    } else if (powerLevel >= 125 && powerLevel < 250) {
       setElectricPropellantMass(
         (100 - chemicalElectricRatio) * totalImpulse * (5.6 / 5000000)
       );
-    } else if (powerLevel >= 300 && powerLevel < 450) {
+    } else if (powerLevel >= 250 && powerLevel < 500) {
       setElectricPropellantMass(
         (100 - chemicalElectricRatio) * totalImpulse * (3.92 / 5000000)
       );
-    } else if (powerLevel >= 450 && powerLevel < 1000) {
+    } else if (powerLevel >= 500) {
       setElectricPropellantMass(
         (100 - chemicalElectricRatio) * totalImpulse * (2.744 / 5000000)
-      );
-    } else if (powerLevel >= 1000) {
-      setElectricPropellantMass(
-        (100 - chemicalElectricRatio) * totalImpulse * (1.9208 / 5000000)
       );
     }
   }, [chemicalElectricRatio, totalImpulse, powerLevel]);
 
   useEffect(() => {
-    if (powerLevel >= 50 && powerLevel < 150) {
+    if (powerLevel >= 75 && powerLevel < 125) {
       setTankMass(chemicalElectricRatio * totalImpulse * (2 / 5000000));
-    } else if (powerLevel >= 150 && powerLevel < 300) {
+    } else if (powerLevel >= 125 && powerLevel < 250) {
       setTankMass(chemicalElectricRatio * totalImpulse * (11.4 / 5000000));
-    } else if (powerLevel >= 300 && powerLevel < 450) {
+    } else if (powerLevel >= 250 && powerLevel < 500) {
       setTankMass(chemicalElectricRatio * totalImpulse * (9.918 / 5000000));
-    } else if (powerLevel >= 450 && powerLevel < 1000) {
+    } else if (powerLevel >= 500) {
       setTankMass(chemicalElectricRatio * totalImpulse * (8.62866 / 5000000));
-    } else if (powerLevel >= 1000) {
-      setTankMass(chemicalElectricRatio * totalImpulse * (7.5069342 / 5000000));
     }
   }, [chemicalElectricRatio, totalImpulse, powerLevel]);
+
+  useEffect(() => {
+    if (powerLevel >= 75 && powerLevel < 125) {
+      setEpThrust(2.5);
+    } else if (powerLevel >= 125 && powerLevel < 250) {
+      setEpThrust(5);
+    } else if (powerLevel >= 250 && powerLevel < 500) {
+      setEpThrust(10);
+    } else if (powerLevel >= 500) {
+      setEpThrust(20);
+    }
+  }, [powerLevel]);
+
+  useEffect(() => {
+    if (powerLevel >= 75 && powerLevel < 125) {
+      setChemicalThrust(2);
+    } else if (powerLevel >= 125 && powerLevel < 250) {
+      setChemicalThrust(2);
+    } else if (powerLevel >= 250 && powerLevel < 500) {
+      setChemicalThrust(4);
+    } else if (powerLevel >= 500) {
+      setChemicalThrust(4);
+    }
+  }, [powerLevel]);
 
   useEffect(() => {
     setSystemWetMass(
@@ -143,7 +143,7 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box w="100%" py="2" bg="#ECEBEB">
+      <Flex w="100%" py="2" bg="#ECEBEB">
         <Container maxW="container.md" mb="6">
           <Card>
             <CardBody>
@@ -275,38 +275,20 @@ function App() {
                       <Text fontWeight="600" fontSize="sm" color="gray.500">
                         POWER LEVEL
                       </Text>
-                      <Spacer />
-                      <Text fontWeight="600" fontSize="sm" mr="2">
-                        {powerLevel}
-                      </Text>
-                      <Text fontWeight="400" fontSize="sm">
-                        N-s
-                      </Text>
                     </Flex>
                     <Box>
-                      <Slider
+                      <Select
+                        size="lg"
                         value={powerLevel}
-                        min={50}
-                        max={1000}
-                        step={50}
-                        onChange={val => {
-                          setPowerLevel(val);
+                        onChange={e => {
+                          setPowerLevel(parseInt(e.target.value));
                         }}
                       >
-                        <SliderTrack>
-                          <SliderFilledTrack />
-                        </SliderTrack>
-                        <SliderThumb />
-                      </Slider>
-                      <Flex align="center">
-                        <Text color="gray.500" fontWeight="600" fontSize="xs">
-                          50
-                        </Text>
-                        <Spacer />
-                        <Text color="gray.500" fontWeight="600" fontSize="xs">
-                          1000
-                        </Text>
-                      </Flex>
+                        <option value={75}>75 W</option>
+                        <option value={125}>125 W</option>
+                        <option value={250}>250 W</option>
+                        <option value={500}>500 W</option>
+                      </Select>
                     </Box>
                   </Stack>
                 </Stack>
@@ -415,7 +397,7 @@ function App() {
             </CardBody>
           </Card>
         </Container>
-      </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
