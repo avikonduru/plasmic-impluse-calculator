@@ -51,7 +51,7 @@ function App() {
   const [systemDryMass, setSystemDryMass] = useState(6);
   const [chemicalPropellantMass, setChemicalPropellantMass] = useState(19);
   const [electricPropellantMass, setElectricPropellantMass] = useState(19);
-  const [tankMass, setTankMass] = useState(2);
+  const [tankMass, setTankMass] = useState(8.7);
 
   const [epThrust, setEpThrust] = useState(2.5);
   const [chemicalThrust, setChemicalThrust] = useState(2);
@@ -100,16 +100,8 @@ function App() {
   }, [chemicalElectricRatio, totalImpulse, powerLevel]);
 
   useEffect(() => {
-    if (powerLevel >= 75 && powerLevel < 125) {
-      setTankMass(chemicalElectricRatio * totalImpulse * (2 / 5000000));
-    } else if (powerLevel >= 125 && powerLevel < 250) {
-      setTankMass(chemicalElectricRatio * totalImpulse * (11.4 / 5000000));
-    } else if (powerLevel >= 250 && powerLevel < 500) {
-      setTankMass(chemicalElectricRatio * totalImpulse * (9.918 / 5000000));
-    } else if (powerLevel >= 500) {
-      setTankMass(chemicalElectricRatio * totalImpulse * (8.62866 / 5000000));
-    }
-  }, [chemicalElectricRatio, totalImpulse, powerLevel]);
+    setTankMass(3 + tankMass * 0.3);
+  }, [tankMass]);
 
   useEffect(() => {
     if (powerLevel >= 75 && powerLevel < 125) {
