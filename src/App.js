@@ -100,8 +100,8 @@ function App() {
   }, [chemicalElectricRatio, totalImpulse, powerLevel]);
 
   useEffect(() => {
-    setTankMass(3 + tankMass * 0.3);
-  }, [tankMass]);
+    setTankMass(3 + chemicalPropellantMass * 0.3);
+  }, [chemicalPropellantMass]);
 
   useEffect(() => {
     if (powerLevel >= 75 && powerLevel < 125) {
