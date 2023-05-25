@@ -74,34 +74,56 @@ function App() {
   }, [powerLevel]);
 
   useEffect(() => {
-    setChemicalPropellantMass(
-      chemicalElectricRatio * totalImpulse * (19 / 5000000)
-    );
-  }, [chemicalElectricRatio, totalImpulse]);
-
-  useEffect(() => {
     if (powerLevel >= 75 && powerLevel < 125) {
-      setElectricPropellantMass(
-        (100 - chemicalElectricRatio) * totalImpulse * (8 / 5000000)
+      setChemicalPropellantMass(
+        chemicalElectricRatio * totalImpulse * (19 / 5000000) * 0.3
       );
     } else if (powerLevel >= 125 && powerLevel < 250) {
-      setElectricPropellantMass(
-        (100 - chemicalElectricRatio) * totalImpulse * (5.6 / 5000000)
+      setChemicalPropellantMass(
+        chemicalElectricRatio * totalImpulse * (19 / 5000000) * 0.4
       );
     } else if (powerLevel >= 250 && powerLevel < 500) {
-      setElectricPropellantMass(
-        (100 - chemicalElectricRatio) * totalImpulse * (3.92 / 5000000)
+      setChemicalPropellantMass(
+        chemicalElectricRatio * totalImpulse * (19 / 5000000) * 0.5
       );
     } else if (powerLevel >= 500) {
-      setElectricPropellantMass(
-        (100 - chemicalElectricRatio) * totalImpulse * (2.744 / 5000000)
+      setChemicalPropellantMass(
+        chemicalElectricRatio * totalImpulse * (19 / 5000000) * 0.6
       );
     }
   }, [chemicalElectricRatio, totalImpulse, powerLevel]);
 
   useEffect(() => {
-    setTankMass(3 + chemicalPropellantMass * 0.3);
-  }, [chemicalPropellantMass]);
+    if (powerLevel >= 75 && powerLevel < 125) {
+      setElectricPropellantMass(
+        (100 - chemicalElectricRatio) * totalImpulse * (8 / 5000000) * 0.3
+      );
+    } else if (powerLevel >= 125 && powerLevel < 250) {
+      setElectricPropellantMass(
+        (100 - chemicalElectricRatio) * totalImpulse * (5.6 / 5000000) * 0.4
+      );
+    } else if (powerLevel >= 250 && powerLevel < 500) {
+      setElectricPropellantMass(
+        (100 - chemicalElectricRatio) * totalImpulse * (3.92 / 5000000) * 0.5
+      );
+    } else if (powerLevel >= 500) {
+      setElectricPropellantMass(
+        (100 - chemicalElectricRatio) * totalImpulse * (2.744 / 5000000) * 0.6
+      );
+    }
+  }, [chemicalElectricRatio, totalImpulse, powerLevel]);
+
+  useEffect(() => {
+    if (powerLevel >= 75 && powerLevel < 125) {
+      setTankMass((3 + chemicalPropellantMass * 0.3) * 0.3);
+    } else if (powerLevel >= 125 && powerLevel < 250) {
+      setTankMass((3 + chemicalPropellantMass * 0.3) * 0.4);
+    } else if (powerLevel >= 250 && powerLevel < 500) {
+      setTankMass((3 + chemicalPropellantMass * 0.3) * 0.5);
+    } else if (powerLevel >= 500) {
+      setTankMass((3 + chemicalPropellantMass * 0.3) * 0.6);
+    }
+  }, [chemicalPropellantMass, powerLevel]);
 
   useEffect(() => {
     if (powerLevel >= 75 && powerLevel < 125) {
