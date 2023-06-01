@@ -289,6 +289,53 @@ function App() {
                       <Text fontWeight="600" fontSize="sm" color="gray.500">
                         POWER LEVEL
                       </Text>
+                      <Spacer />
+                      <Text fontWeight="600" fontSize="sm" mr="2">
+                        {powerLevel === 0 ? '-' : powerLevel}
+                      </Text>
+                      <Text fontWeight="400" fontSize="sm">
+                        W
+                      </Text>
+                    </Flex>
+                    <Box>
+                      <Slider
+                        value={powerLevel}
+                        min={50}
+                        max={1500}
+                        step={50}
+                        onChange={val => {
+                          setPowerLevel(val);
+                        }}
+                      >
+                        <SliderTrack>
+                          <SliderFilledTrack />
+                        </SliderTrack>
+                        <SliderThumb />
+                      </Slider>
+                      <Flex align="center">
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
+                          50
+                        </Text>
+                        <Spacer />
+                        <Text color="gray.500" fontWeight="600" fontSize="xs">
+                          1500
+                        </Text>
+                      </Flex>
+                    </Box>
+                  </Stack>
+
+                  {/* <Stack>
+                    <Flex align="center">
+                      <Text fontWeight="600" fontSize="sm" color="gray.500">
+                        POWER LEVEL
+                      </Text>
+                      <Spacer />
+                      <Text fontWeight="600" fontSize="sm" mr="2">
+                        {totalDeltaV === 0 ? '-' : totalDeltaV}
+                      </Text>
+                      <Text fontWeight="400" fontSize="sm">
+                        m/s
+                      </Text>
                     </Flex>
                     <Box>
                       <Select
@@ -304,7 +351,7 @@ function App() {
                         <option value={500}>500 W</option>
                       </Select>
                     </Box>
-                  </Stack>
+                  </Stack> */}
                 </Stack>
               </Box>
             </CardBody>
